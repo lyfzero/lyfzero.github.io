@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="lyf">
 <meta property="og:description" content="SVM本文通过对线性支持向量机、非线性支持向量机及核技巧、求解SVM的一种算法SMO的介绍，谈一谈自己对SVM学习的初步认知，若有不当之处还望指正。支持向量机（Support Vector Machine，简称SVM）是一种二类分类模型，基本模型是定义在特征空间上的间隔最大的线性分类器，可转化为凸二次规划的求解。     线性可分支持向量机 线性支持向量机 非线性支持向量机 SMO算法   线性可">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-21T15:22:55.948Z">
+<meta property="og:updated_time" content="2019-06-21T16:04:10.844Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="svm">
 <meta name="twitter:description" content="SVM本文通过对线性支持向量机、非线性支持向量机及核技巧、求解SVM的一种算法SMO的介绍，谈一谈自己对SVM学习的初步认知，若有不当之处还望指正。支持向量机（Support Vector Machine，简称SVM）是一种二类分类模型，基本模型是定义在特征空间上的间隔最大的线性分类器，可转化为凸二次规划的求解。     线性可分支持向量机 线性支持向量机 非线性支持向量机 SMO算法   线性可">
@@ -335,16 +335,17 @@
 </ul>
 <hr>
 <h2 id="线性可分支持支持向量机"><a href="#线性可分支持支持向量机" class="headerlink" title="线性可分支持支持向量机"></a>线性可分支持支持向量机</h2><p> 回顾一下线性分类器的概念。<br> 在二元分类情况下，假设给定特征空间上的数据集</p>
-<script type="math/tex; mode=display">T={(x_1,y_1),(x_2,y_2),...,(x_N,y_N)}</script><p> 其中，$x_i\in\chi=R^n,y_i\in\Upsilon=\{+1,-1\},i=1,2,…N,x_i$为第$i$个特征向量，$y_i$为$x_i$的类标记，$(x_i,y_i)$称为样本点。假设训练数据集线性可分。<br>线性分类器的学习目标就是找到一个超平面$w^Tx+b=0$将样本点分开。但是超平面如果仅仅是将样本点分开，会存在无穷个（如在感知机中，解就有无数个）。线性可分支持向量机通过硬间隔最大化来求唯一的最优分离超平面。</p>
+<script type="math/tex; mode=display">T={(x_1,y_1),(x_2,y_2),...,(x_N,y_N)}</script><p> 其中，$x_i\in\chi=R^n,y_i\in\Upsilon=\{+1,-1\},i=1,2,…N,x_i$<br> 为第$i$个特征向量，$y_i$为$x_i$的类标记，$(x_i,y_i)$称为样本点。假设训练数据集线性可分。<br>线性分类器的学习目标就是找到一个超平面$w^Tx+b=0$将样本点分开。但是超平面如果仅仅是将样本点分开，会存在无穷个（如在感知机中，解就有无数个）。线性可分支持向量机通过硬间隔最大化来求唯一的最优分离超平面。</p>
 <p>定义1（<strong>线性可分支持向量机</strong>）给定线性可分训练数据集，通过间隔最大化或等价地求解相应的凸二次规划问题学习得到的分离超平面 $w^<em>\cdot x+b^</em>=0$，决策函数 $f(x)=sign(w^<em>\cdot x+b^</em>)$,即为线性可分支持向量机。  </p>
 <ul>
 <li><h3 id="间隔"><a href="#间隔" class="headerlink" title="间隔"></a>间隔</h3>此处的间隔是用来度量分类预测的确信程度，在超平面确定时，$|w\cdot x+b|$表示样本点距离超平面的远近，$w\cdot x+b$与样本点标签$y$乘积的正负可表示分类的正确性，所以可用$y(w\cdot x+b)$表示分类的正确性和确信度，也叫做函数间隔。<br>定义样本点的<strong>函数间隔</strong>为   <script type="math/tex; mode=display">\widehat{\gamma}=y(w^Tx+b)=yf(x)</script>超平面关于数据集$T$的函数间隔为<script type="math/tex; mode=display">\widehat{\gamma}=min\widehat{\gamma}_i,(i=1,\ldots,n)</script>但是随着$w$和$b$的成比例，函数间隔的值会相应地发生变化，此时超平面却没有改变。为保证间隔的可度量性，我们可以对$w$加上一定的约束，用直观上的点到超平面的距离替代函数间隔，即选取几何间隔。<br><strong>几何间隔</strong>为  <script type="math/tex; mode=display">\widetilde\gamma=y\frac{w^Tx+b}{||w||}=y\frac{f(x)}{||w||}=y\gamma=\frac{\widehat\gamma}{||w||}</script>由上可以看出，几何间隔就是函数间隔除以$||w||$。   </li>
 <li><h3 id="间隔最大化"><a href="#间隔最大化" class="headerlink" title="间隔最大化"></a>间隔最大化</h3>我们现在已经明白了间隔的概念，并为了在超平面保持不变时间隔不会随$w$和$b$的值变动，选取几何间隔作为度量分类确信度的标准。那么间隔最大化，就是寻找一个超平面，使其对数据集$T$的几何间隔最大。<br>于是需要优化的目标函数可定义为<script type="math/tex; mode=display">max\widetilde\gamma,\quad s.t.\ y_i(w^Tx_i+b)=\widehat\gamma_i\geq\widetilde{\gamma},\qquad i=1,\ldots,n</script>为方便推导和优化，令函数间隔$\widehat{\gamma}=1$，则目标函数转化为<script type="math/tex; mode=display">max\widetilde\gamma=\frac{1}{||w||},\quad s.t.\ y_i(w^Tx_i+b)\geq1,\qquad i=1,\ldots,n</script>（此处有图,我的图呢$\ldots$,直观解释超平面的几何间隔，支持向量，即支持向量机名字的由来)</li>
 <li><h3 id="对偶算法学习线性可分支持向量机"><a href="#对偶算法学习线性可分支持向量机" class="headerlink" title="对偶算法学习线性可分支持向量机"></a>对偶算法学习线性可分支持向量机</h3><p>上面得到的目标函数还是不好求解，因求$max\frac{1}{||w||}$和求$min\frac12||w||^2$等价，而后者为二次函数更易优化，可替代前者。这时我们要求解的就是一个凸二次规划问题，可用现成的优化包求解。此处由于问题的特殊结构（？），我们通过引入拉氏乘子，构造拉格朗日函数，应用拉格朗日对偶性，从对偶问题的求解得出原始问题的解。<br>具体地，对每个不等式约束引入拉格朗日乘子，定义拉格朗日函数为：</p>
-<script type="math/tex; mode=display">L(w,b,\alpha)=\frac12||w||^2-\sum_{i=1}^n\alpha_i(y_i(w^Tx_i+b)-1),\alpha_i\geq0</script><p>当所有约束条件都满足时，$max_{\alpha}L=\frac12||w||^2$是我们最初要优化的量，（易看出不满足约束条件时，令相应$\alpha=\infty，$最大值为$\infty$），因此目标函数为<br><script type="math/tex">min_{\alpha}max_{w,b}L(w,b,\alpha)</script>,设解为$p^<em> $。<br>但上面的目标函数在求解时，第一步就需求解双变量函数极值，$\alpha$又为不等式约束，求解过程不好做，因此选择对其对偶问题先求解，对偶问题目标函数为：$max_{w,b}min_{\alpha}L(w,b,\alpha)$，设解为$d^</em>$。即先求$L$对$w、b$的极小，再求对$\alpha$的极大。  </p>
+<script type="math/tex; mode=display">L(w,b,\alpha)=\frac12||w||^2-\sum_{i=1}^n\alpha_i(y_i(w^Tx_i+b)-1),\alpha_i\geq 0</script><p>当所有约束条件都满足时，$max_{\alpha}L$=$\frac12||w||^2$是我们最初要优化的量，（易看出不满足约束条件时，令相应$\alpha=\infty$,最大值为$\infty$），因此目标函数为</p>
+<script type="math/tex; mode=display">min_{\alpha}max_{w,b}L(w,b,\alpha)</script><p>,设解为$p^<em>$。<br>但上面的目标函数在求解时，第一步就需求解双变量函数极值，$\alpha$又为不等式约束，求解过程不好做，因此选择对其对偶问题先求解，对偶问题目标函数为：$max_{w,b}min_{\alpha}L(w,b,\alpha)$，设解为$d^</em>$。即先求$L$对$w、b$的极小，再求对$\alpha$的极大。  </p>
 </li>
 <li><p><strong>KKT条件</strong><br>将原问题转换为对偶问题要使两者等价需要满足下面的KKT条件。<br>假设优化问题为</p>
-<script type="math/tex; mode=display">min\quad f(x)</script><script type="math/tex; mode=display">s.t.\quad h_j(x)=0,\quad j=1,\ldots,p</script><script type="math/tex; mode=display">\quad g_k(x)\leq0,k=1,\ldots,q</script><script type="math/tex; mode=display">x\in \chi\subset R^n</script><p>KKT条件（能有最优化解法的充要条件）为：<br>$\ h_j(x^<em>)=0,j=1,\ldots p,\quad g_k(x^</em>)\leq0,k=1,\ldots,q$$</p>
+<script type="math/tex; mode=display">min\quad f(x)</script><script type="math/tex; mode=display">s.t.\quad h_j(x)=0,\quad j=1,\ldots,p</script><script type="math/tex; mode=display">\quad g_k(x)\leq0,k=1,\ldots,q</script><script type="math/tex; mode=display">x\in \chi\subset R^n</script><p>KKT条件（能有最优化解法的充要条件）为：<br>$ h_j(x^<em>)=0,j=1,\ldots p,\quad g_k(x^</em>)\leq0,k=1,\ldots,q$$</p>
 <script type="math/tex; mode=display">\ \Delta f(x^*)+\sum_{j=1}^{p}\lambda_j\Delta h_j(x^*)+\sum_{k=1}^q \mu_k\Delta g_k(x^*)=0,\lambda_j\neq0,\mu\geq0,\mu_k g_k(x*k)=0</script></li>
 </ul>
 <h3 id="对偶问题的求解步骤"><a href="#对偶问题的求解步骤" class="headerlink" title="对偶问题的求解步骤"></a>对偶问题的求解步骤</h3><p>1、求$\min_{w,b}L(w,b,\alpha)$，视$\alpha$为常量<br>将L分别对w,b求偏导，令其为0，即</p>
