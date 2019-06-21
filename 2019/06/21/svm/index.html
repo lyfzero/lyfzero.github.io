@@ -79,13 +79,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="SVM分类器本文通过对线性支持向量机、非线性支持向量机及核技巧、求解SVM的一种算法SMO的介绍，谈一谈自己对SVM学习的初步认知，若有不当之处还望指正。支持向量机（Support Vector Machine，简称SVM）是一种二类分类模型，基本模型是定义在特征空间上的间隔最大的线性分类器，可转化为凸二次规划的求解。     线性可分支持向量机 线性支持向量机 非线性支持向量机 SMO算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="svm">
+<meta property="og:url" content="http://yoursite.com/2019/06/21/svm/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="SVM分类器本文通过对线性支持向量机、非线性支持向量机及核技巧、求解SVM的一种算法SMO的介绍，谈一谈自己对SVM学习的初步认知，若有不当之处还望指正。支持向量机（Support Vector Machine，简称SVM）是一种二类分类模型，基本模型是定义在特征空间上的间隔最大的线性分类器，可转化为凸二次规划的求解。     线性可分支持向量机 线性支持向量机 非线性支持向量机 SMO算法">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-21T08:09:19.497Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="svm">
+<meta name="twitter:description" content="SVM分类器本文通过对线性支持向量机、非线性支持向量机及核技巧、求解SVM的一种算法SMO的介绍，谈一谈自己对SVM学习的初步认知，若有不当之处还望指正。支持向量机（Support Vector Machine，简称SVM）是一种二类分类模型，基本模型是定义在特征空间上的间隔最大的线性分类器，可转化为凸二次规划的求解。     线性可分支持向量机 线性支持向量机 非线性支持向量机 SMO算法">
 
 
 
@@ -115,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/21/svm/">
 
 
 
 
 
-  <title>Hexo</title>
+  <title>svm | Hexo</title>
   
 
 
@@ -140,8 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -214,9 +217,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -246,9 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/21/svm/" itemprop="url">svm</a></h1>
+          <h1 class="post-title" itemprop="name headline">svm</h1>
         
 
         <div class="post-meta">
@@ -298,9 +299,7 @@
       
 
       
-        
-          
-            <h1 id="SVM分类器"><a href="#SVM分类器" class="headerlink" title="SVM分类器"></a>SVM分类器</h1><p>本文通过对线性支持向量机、非线性支持向量机及核技巧、求解SVM的一种算法SMO的介绍，谈一谈自己对SVM学习的初步认知，若有不当之处还望指正。<br>支持向量机（Support Vector Machine，简称SVM）是一种二类分类模型，基本模型是定义在特征空间上的间隔最大的线性分类器，可转化为凸二次规划的求解。   </p>
+        <h1 id="SVM分类器"><a href="#SVM分类器" class="headerlink" title="SVM分类器"></a>SVM分类器</h1><p>本文通过对线性支持向量机、非线性支持向量机及核技巧、求解SVM的一种算法SMO的介绍，谈一谈自己对SVM学习的初步认知，若有不当之处还望指正。<br>支持向量机（Support Vector Machine，简称SVM）是一种二类分类模型，基本模型是定义在特征空间上的间隔最大的线性分类器，可转化为凸二次规划的求解。   </p>
 <ul>
 <li>线性可分支持向量机</li>
 <li>线性支持向量机</li>
@@ -348,8 +347,6 @@
 <p>为方便计算，可先求解$\alpha_2$。<br>1、求$\alpha_2$的范围[L~H]<br>因$\alpha_1^{new}y_1+\alpha_2^{new}=\alpha_1^{old}y_1+\alpha_2^{new}y_2=\zeta$,$0&lt; \alpha_i&lt;C$,<br>当$y_1\neq y_2$时，$\alpha_1^{old}+\alpha_2^{old}=\zeta$,故$L=max(0,-\zeta),H=min(C,C-\zeta)$<br>当$y_1= y_2$时，$\alpha_1^{old}-\alpha_2^{old}=\zeta$,故$L=max(0,\zeta-C),H=min(C,\zeta)$<br>2、在约束方向求$\alpha_2$的最优解并剪辑<br>将$\alpha_1$用$\alpha_2$表示并带入目标函数，对$\alpha_2$求导，得到<br>$\alpha_2^{new,unc}=\alpha_2^{old}+\frac{E_1-E_2}{\eta}$,其中$\eta=K_{11}+K_{22}-2K{12}=||\Phi(x_1)-\phi(x_2)||^2$，<br>$E_i=u_i-y_i=(\sum_{j=1}^N\alpha_jy_jK(x_j,x_i)+b$为误差<br>剪辑后，$\alpha_2^{new}=<br>\begin{cases}<br>H,\alpha_2^{new,unc}&gt;H\<br>\alpha_2^{new,unc},L\leq\alpha_2^{new,unc}\leq H\L,\alpha_2^{new,unc}&lt;L\end{cases}$<br>3、求$\alpha_1^{new}$<br>$\alpha_1^{new}=\alpha_1^{old}+y_1 y_2(\alpha_2^{old}-\alpha_2^{new})$</p>
 <hr>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">class svm(object):</span><br><span class="line">    def __init__(self,C=1,tol=0.001,maxIter=400,kernel_option=(&apos;&apos;,1)):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        C:正则化参数，tol：容错率，maxIter：迭代次数，kernel：核函数</span><br><span class="line">        data：数据，labels：数据对应标签，num：数据条数</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        self.C = C</span><br><span class="line">        self.tol = tol</span><br><span class="line">        self.kernel_opt = kernel_option</span><br><span class="line">        self.b = 0</span><br><span class="line">        self.E = np.mat(np.zeros((self.num,2)))</span><br><span class="line">        self.data = np.mat(np.zeros((1,1)))</span><br><span class="line">        self.num = shape(data)[0]</span><br><span class="line">        self.alphas = np.mat(np.zeros((self.num,1)))</span><br><span class="line">        self.labels = np.mat(np.zeros((1,1)))</span><br><span class="line">        self.kernel_mat = np.mat(np.zeros((1,1)))</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    def getKernelValue(self,data,data_i):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        计算所有数据跟第i个数据的核函数的值</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        num = data.shape[0]</span><br><span class="line">        kernel_value = np.mat(np.zeros((num,1)))</span><br><span class="line">        if self.kernel_opt[0] == &apos;rbf&apos;:</span><br><span class="line">            sigma = kernel_opt[1]</span><br><span class="line">            for i in range(num):</span><br><span class="line">                dif = data[i,:] - data_i</span><br><span class="line">                kernel_value[i] = np.exp(np.dot(dif,dif.T)/(-2 * sigma**2))</span><br><span class="line">        else:</span><br><span class="line">            kernel_value = np.dot(data,data_i.T)</span><br><span class="line">        return kernel_value</span><br><span class="line"></span><br><span class="line">    def calKernelMat(self,data):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        计算数据核函数的值</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        num = data.shape[0]</span><br><span class="line">        kernel_mat = np.mat(np.zeros((num,num)))</span><br><span class="line">        for i in range(num):</span><br><span class="line">            kernel_mat[:,i] = self.getKernelValue(data,data[i,:])</span><br><span class="line">        return kernel_mat</span><br><span class="line">        </span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    def getE(self,i):</span><br><span class="line">        &quot;&quot;&quot;k为数据条索引值&quot;&quot;&quot;</span><br><span class="line">        predict = float(np.dot(self.kernel_mat[i,:],np.multiply(self.alphas,self.labels) + self.b)</span><br><span class="line">        E = predict - float(self.labels[i])</span><br><span class="line">        return E</span><br><span class="line"></span><br><span class="line">    def updateE(self,i):</span><br><span class="line">        &quot;&quot;&quot;更新Ei的值和标识&quot;&quot;&quot;</span><br><span class="line">        Ei = getE(i)</span><br><span class="line">        self.E[i] = [1,Ei]</span><br><span class="line"></span><br><span class="line">    def clipAlpha(self,alpha,l,h):</span><br><span class="line">        &quot;&quot;&quot;裁剪alpha&quot;&quot;&quot;</span><br><span class="line">        if alpha &gt; h:</span><br><span class="line">            return h</span><br><span class="line">        if alpha &lt; l:</span><br><span class="line">            return l</span><br><span class="line">        return alpha</span><br><span class="line"></span><br><span class="line">    def chooseSecondRand(self,i):</span><br><span class="line">        &quot;&quot;&quot;随机选取与i不同的索引值&quot;&quot;&quot;</span><br><span class="line">        j = i</span><br><span class="line">        while j == i:</span><br><span class="line">            j = np.random.randint(0,self.num)</span><br><span class="line">        return j</span><br><span class="line"></span><br><span class="line">    def chooseSecondAlpha(self,i,Ei):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        i和Ei是第一个alpha的对应数据索引下标和误差</span><br><span class="line">        选择的第二个最优alpha</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        j,Ej,maxstep = -1,0,0</span><br><span class="line">        self.E[i] = [1,Ei]</span><br><span class="line">        valid_e = np.nonzero(self.E[:,0])[0]</span><br><span class="line">        if len(validElist) &gt; 1:</span><br><span class="line">            for k in valid_e:</span><br><span class="line">                if k == i:</span><br><span class="line">                    continue</span><br><span class="line">                Ek = self.getE(self,k)</span><br><span class="line">                delta_E = abs(Ei-Ek)</span><br><span class="line">                if delta_E &gt; maxstep:</span><br><span class="line">                    j,Ej,maxstep = k,Ek,delta_E</span><br><span class="line">        else:</span><br><span class="line">            j = self.chooseSecondRand(i)</span><br><span class="line">            Ej = self.getE(j)</span><br><span class="line">        return j, Ej</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    def innerLoop(self,i):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        判断i样本是否满足KKT条件，满足则返回0，否则更新alpha，更新了返回1</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        Ei = self.getE(i)</span><br><span class="line">        pred = self.labels[i] * Ei</span><br><span class="line">        if ((pred &lt; -self.tol) and (self.alphas[i] &lt; self.C)) or ((pred &gt; self.tol) and (self.alphas[i] &gt; 0)): #不满足KKT条件</span><br><span class="line">            j,Ej = self.chooseSecondAlpha(i,Ei) </span><br><span class="line">            alpha_i_old = self.alphas[i].copy()</span><br><span class="line">            alpha_j_old = self.alphas[j].copy()</span><br><span class="line">            #计算边界l和h</span><br><span class="line">            if self.labels[i] != self.labels[j]:</span><br><span class="line">                L = max(0,self.alphas[j]-self.alphas[i])</span><br><span class="line">                H = min(self.C, self.C+self.alphas[j]-self.alphas[i])</span><br><span class="line">            else:</span><br><span class="line">                L = max(0,self.alphas[j]+self.alphas[i]-self.C)</span><br><span class="line">                H = min(self.C,self.alphas[j]+self.alphas[i])</span><br><span class="line">            if L == H:</span><br><span class="line">                return 0</span><br><span class="line"></span><br><span class="line">            eta = 2.0 * self.kernel_mat[i,j] - self.kernel_mat[i,i] - self.kernel_mat[j,j]</span><br><span class="line">            if eta &gt;= 0:</span><br><span class="line">                return 0</span><br><span class="line"></span><br><span class="line">            alpha_j_new = alpha_j_old + self.labels[j]*(Ei-Ej)/eta</span><br><span class="line">            alpha_j_new = self.clipAlpha(alpha_j_new,L,H)</span><br><span class="line">            if abs(alpha_j_new - alpha_j_old) &lt; 0.00001:</span><br><span class="line">                return 0</span><br><span class="line"></span><br><span class="line">            alpha_i_new = alpha_i_old + self.labels[j]*self.labels[i]*(alpha_j_old - alpha_j_new)</span><br><span class="line">            </span><br><span class="line">            updateEk(self,i)</span><br><span class="line">            updateEk(self,j)</span><br><span class="line"></span><br><span class="line">            b1 = self.b - Ei - self.labels[i]*self.kernel_mat[i,i]*(alpha_i_old-alpha_i_new) + self.labels[j]*self.kernel_mat[i,j]*(alpha_j_old-alpha_j_new)</span><br><span class="line">            b2 = self.b - Ej - self.labels[i]*self.kernel_mat[i,j]*(alpha_i_old-alpha_i_new) + self.labels[j]*self.kernel_mat[j,j]*(alpha_j_old-alpha_j_new)</span><br><span class="line">            if 0 &lt; alpha_i_new &lt; self.C:</span><br><span class="line">                self.b = b1</span><br><span class="line">            elif 0 &lt; oS.alphas[j] &lt; self.C:</span><br><span class="line">                self.b = b2</span><br><span class="line">            else:</span><br><span class="line">                self.b = (b1 + b2)/2</span><br><span class="line">            self.alphas[i] = alpha_i_new</span><br><span class="line">            self.alphas[j] = alpha_j_new</span><br><span class="line">            return 1</span><br><span class="line">        else:</span><br><span class="line">            return 0</span><br><span class="line"></span><br><span class="line">def trainBysmo(self,data,labels):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    求alpha和b</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    self.b = 0</span><br><span class="line">    self.E = np.mat(np.zeros((self.num,2)))</span><br><span class="line">    self.data = np.mat(data)</span><br><span class="line">    self.num = shape(data)[0]</span><br><span class="line">    self.alphas = np.mat(np.zeros((self.num,1)))</span><br><span class="line">    self.E = np.mat(np.zeros((self.num,2)))</span><br><span class="line">    self.labels = np.mat(labels)</span><br><span class="line">    self.kernel_mat = self.calKernelMat(self.data)</span><br><span class="line">    </span><br><span class="line">    iters = 0</span><br><span class="line">    flag = True #True遍历所有数据，False遍历支持向量</span><br><span class="line">    alpha_changed = 0</span><br><span class="line"></span><br><span class="line">    while iters &lt; self.maxIter and (alpha_changed &gt; 0 or flag):</span><br><span class="line">        alpha_changed = 0</span><br><span class="line">        if flag:</span><br><span class="line">            for i in range(self.num):</span><br><span class="line">                alpha_changed += self.innerLoop(i)</span><br><span class="line">            iters += 1</span><br><span class="line">        else:</span><br><span class="line">            bound_alphas = [i for i,alpha in enumerate(self.alphas) if 0&lt;alpha&lt;self.C]</span><br><span class="line">            for i in bound_alphas:</span><br><span class="line">                alpha_changed += self.innerLoop(i)</span><br><span class="line">            iters += 1</span><br><span class="line">        if flag:</span><br><span class="line">            flag = False </span><br><span class="line">        elif alpha_changed == 0:</span><br><span class="line">            flag = True </span><br><span class="line">    </span><br><span class="line">    def classify(self,data,labels):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        输入数据，输出类别（+-1）和准确率</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        data = np.mat(data)</span><br><span class="line">        alpha_nonzero = np.nonzero(self.alphas)[0]</span><br><span class="line">        support_alpha = self.alpha[alpha_nonzero,:]</span><br><span class="line">        support_data = self.datas[alpha_nonzero,:]</span><br><span class="line">        support_labels = self.labels[alpha_nonzero,:]</span><br><span class="line"></span><br><span class="line">        num_pred = data.shape[0]</span><br><span class="line">        num_support = support_data.shape[0]</span><br><span class="line">        kernel_mat = np.mat(np.zeros((num_pred,num_support)))</span><br><span class="line">        for i in range(num_pred):</span><br><span class="line">            kernel_mat[i,:] = self.getKernelValue(support_data,data[i,:]).T </span><br><span class="line">        pred = np.dot(kernel_mat,np.multiply(support_alpha,support_labels)) + self.b</span><br><span class="line">        pred_lables = [1 if x&gt;=0 else -1 for x in pred]</span><br><span class="line">        correct_labels = [1 if p==l else 0 for p,l in zip(pred_lables,labels)]</span><br><span class="line">        correct = correct.count(1) / len(correct_labels)</span><br><span class="line">        return pred_lables,correct</span><br></pre></td></tr></table></figure>
-          
-        
       
     </div>
     
@@ -366,140 +363,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/06/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liyi fan">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/06/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-06T06:13:47+08:00">
-                2019-05-06
-              </time>
+              <a href="/2019/05/06/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -509,10 +394,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -520,6 +406,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -540,8 +430,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -583,6 +482,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SVM分类器"><span class="nav-number">1.</span> <span class="nav-text">SVM分类器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线性可分支持支持向量机"><span class="nav-number">1.1.</span> <span class="nav-text">线性可分支持支持向量机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#间隔"><span class="nav-number">1.1.1.</span> <span class="nav-text">间隔</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#间隔最大化"><span class="nav-number">1.1.2.</span> <span class="nav-text">间隔最大化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对偶算法学习线性可分支持向量机"><span class="nav-number">1.1.3.</span> <span class="nav-text">对偶算法学习线性可分支持向量机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对偶问题的求解步骤"><span class="nav-number">1.1.4.</span> <span class="nav-text">对偶问题的求解步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性支持向量机"><span class="nav-number">1.2.</span> <span class="nav-text">线性支持向量机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对偶算法学习线性支持向量机"><span class="nav-number">1.2.1.</span> <span class="nav-text">对偶算法学习线性支持向量机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非线性支持向量机"><span class="nav-number">1.3.</span> <span class="nav-text">非线性支持向量机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#核技巧"><span class="nav-number">1.3.1.</span> <span class="nav-text">核技巧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#smo算法"><span class="nav-number">1.4.</span> <span class="nav-text">smo算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#推导"><span class="nav-number">1.4.1.</span> <span class="nav-text">推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">1.4.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -723,6 +638,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
