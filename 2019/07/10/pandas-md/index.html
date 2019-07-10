@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="pandas笔记笔记…… cheat sheet  创建pandas两种对象：  DataFrame：一个表，字典。包含了单独的条目，用pd.DataFrame()生成对象，键表示列的名字，值表示列下的元素，行的名字可以用index规定 Series：一连串的值，列表。可以用一个列表生成pd.Series()，只有整个对象的名字 可以把dataframe看成是一系列series连起来的结构   从">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pandas">
+<meta property="og:url" content="http://yoursite.com/2019/07/10/pandas-md/index.html">
+<meta property="og:site_name" content="lyf">
+<meta property="og:description" content="pandas笔记笔记…… cheat sheet  创建pandas两种对象：  DataFrame：一个表，字典。包含了单独的条目，用pd.DataFrame()生成对象，键表示列的名字，值表示列下的元素，行的名字可以用index规定 Series：一连串的值，列表。可以用一个列表生成pd.Series()，只有整个对象的名字 可以把dataframe看成是一系列series连起来的结构   从">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-10T10:17:43.667Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pandas">
+<meta name="twitter:description" content="pandas笔记笔记…… cheat sheet  创建pandas两种对象：  DataFrame：一个表，字典。包含了单独的条目，用pd.DataFrame()生成对象，键表示列的名字，值表示列下的元素，行的名字可以用index规定 Series：一连串的值，列表。可以用一个列表生成pd.Series()，只有整个对象的名字 可以把dataframe看成是一系列series连起来的结构   从">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/10/pandas-md/">
+
+
+
+
+
+  <title>pandas | lyf</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lyf</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Notes</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-首页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/pandas-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="li yifan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lyf">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">pandas</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-10T18:15:13+08:00">
+                2019-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="pandas"><a href="#pandas" class="headerlink" title="pandas"></a>pandas</h2><p>笔记笔记……</p>
+<p><a href="https://assets.datacamp.com/blog_assets/PandasPythonForDataScience.pdf" target="_blank" rel="noopener">cheat sheet</a></p>
+<ol>
+<li><p>创建pandas两种对象：</p>
+<ul>
+<li>DataFrame：一个表，字典。包含了单独的条目，用<code>pd.DataFrame()</code>生成对象，键表示列的名字，值表示列下的元素，行的名字可以用<code>index</code>规定</li>
+<li>Series：一连串的值，列表。可以用一个列表生成<code>pd.Series()</code>，只有整个对象的名字</li>
+<li>可以把dataframe看成是一系列series连起来的结构</li>
+</ul>
+</li>
+<li><p>从已经存在的数据中<a href="http://pandas.pydata.org/pandas-docs/stable/io.html" target="_blank" rel="noopener">导入导出</a>，常见的数据格式</p>
+<ul>
+<li>CSV（comma-separated values）：一个值用逗号隔开的表<ul>
+<li>导入：<code>xxx_reviews = pd.read_csv(xxx_path)</code></li>
+<li>查看DataFrame的形状：<code>xxx_reviews.shape</code></li>
+<li>检查（前五行）：<code>xxx_reviews.head</code></li>
+<li>不要行索引：<code>read_csv</code>时设置<code>index_col=0</code></li>
+<li>导出：xxx_reviews.head().to_csv(csv_filename)</li>
+</ul>
+</li>
+<li>Excel()<ul>
+<li>导入：要指定哪一张<code>xxx = pd.read_excel(xxx_path,sheet_name=xxxx)</code></li>
+<li>不一定好导入，需要提前处理。。。</li>
+<li>导出：<code>xxx.to_excel(excel_filename, sheet_name=xxxx)</code></li>
+</ul>
+</li>
+<li>SQL(Structured Query Language)：一系列有名字的表<ul>
+<li>创建一个connector，用<code>sqlite3</code>库<code>conn = sqlite3.connect(xxx_path)</code></li>
+<li>导入：`xxx = pd.read_sql_query(“SELECT * FROM fires”,  conn)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="https://pandas.pydata.org/pandas-docs/stable/indexing.html" target="_blank" rel="noopener">索引</a>：</p>
+<ul>
+<li><p>dataframe像调用属性一样<code>xx.xxx</code>或<code>xx[&#39;xxx&#39;]</code>，series：下标索引</p>
+</li>
+<li><p>用pandas自己的索引<code>iloc</code>和<code>loc</code>范式</p>
+</li>
+<li><p><code>iloc</code>：index-based selection</p>
+<p><code>xxx.iloc[0]</code>引用一列（包括列标），<code>xxx.iloc[:,0]</code>（不包括列标）</p>
+</li>
+<li><p><code>loc</code>：Label-based selection，在列标有意义时很有用</p>
+</li>
+<li><p>iloc 使用 Python stdlib 索引方案,其中包含范围的第一个元素,排除最后一个元素。因此 0:10 将选择条目 0,…,9。同时,包括索引。因此 0:10 将选择条目 0,…,10。</p>
+</li>
+<li><p>操纵索引：<code>xxx.set_index(&quot;title&quot;)</code></p>
+</li>
+</ul>
+</li>
+<li><p>条件选择</p>
+<ul>
+<li>e.g.<code>reviews.loc[reviews.country == &#39;Italy&#39;]</code></li>
+<li>与：<code>reviews.loc[(reviews.country == &#39;Italy&#39;) &amp; (reviews.points &gt;= 90)]</code></li>
+<li>或：`reviews.loc[(reviews.country == ‘Italy’) | (reviews.points &gt;= 90)]``</li>
+<li>本身的：<ul>
+<li><code>`isin</code>:<code>reviews.loc[reviews.country.isin([&#39;Italy&#39;, &#39;France&#39;])]</code></li>
+<li><code>isnull  notnull</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>赋值：</p>
+<ul>
+<li>赋常值</li>
+<li>赋一连串的值</li>
+</ul>
+</li>
+<li><p><a href="https://pandas.pydata.org/pandas-docs/stable/basics.html" target="_blank" rel="noopener">摘要函数</a>(summary functions)：</p>
+<ul>
+<li><code>xxx.describe()</code>对不同类型的数据生成不同的摘要类型，生成series</li>
+<li><code>xxx.mean()</code>（数值型）</li>
+<li><code>xxx.unique()</code></li>
+<li><code>xxx.value_counts()</code>，生成series</li>
+</ul>
+</li>
+<li><p>映射（map）：生成新的DataFrame（每次改变一条entry）</p>
+<ul>
+<li><p>均值为设为0：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">review_points_mean = reviews.points.mean()</span><br><span class="line">reviews.points.map(<span class="keyword">lambda</span> p: p - review_points_mean)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>DataFrame.apply</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">remean_points</span><span class="params">(row)</span>:</span></span><br><span class="line">    row.points = row.points - review_points_mean</span><br><span class="line">    <span class="keyword">return</span> row</span><br><span class="line"></span><br><span class="line">reviews.apply(remean_points, axis=<span class="string">'columns'</span>)  <span class="comment"># 把</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用built-in的函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">review_points_mean = reviews.points.mean()</span><br><span class="line">reviews.points - review_points_mean</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><a href="https://pandas.pydata.org/pandas-docs/stable/groupby.html" target="_blank" rel="noopener">grouping</a>（分组）</p>
+<ul>
+<li><p>可对分的组进行summary function的操作</p>
+</li>
+<li><p>可以按照多种column进行分组</p>
+</li>
+<li><p>可以用agg进行多种函数的操作</p>
+</li>
+</ul>
+<p><code>reviews.groupby([&#39;country&#39;]).price.agg([len, min, max])</code></p>
+<ul>
+<li><a href="https://pandas.pydata.org/pandas-docs/stable/advanced.html" target="_blank" rel="noopener">多下标索引</a><code>xxx.reset_index()</code>下标重排</li>
+</ul>
+</li>
+<li><p><a href="https://pandas.pydata.org/pandas-docs/stable/basics.html#sorting" target="_blank" rel="noopener">排序</a></p>
+<ul>
+<li><code>xxx.sort_values(by=xxx)</code>默认为升序，可设置<code>ascending=False</code>为降序，<code>by</code>可选好几列来排</li>
+<li><code>xxx.sort_index()</code>按下标排序</li>
+</ul>
+</li>
+<li><p><a href="https://pandas.pydata.org/pandas-docs/stable/dsintro.html" target="_blank" rel="noopener">数据类型和缺失值</a>NaN(not a number)</p>
+<ul>
+<li>查看数据类型<code>xxx.dtype</code></li>
+<li>设置数据类型<code>xxx.astype()</code></li>
+<li>找出缺失值<code>xxx.isnull()</code></li>
+<li>补全缺失值<code>xxx.fillna(xxxx)</code></li>
+</ul>
+</li>
+<li><p><a href="https://pandas.pydata.org/pandas-docs/stable/basics.html#renaming-mapping-labels" target="_blank" rel="noopener">重命名</a></p>
+<ul>
+<li>把A改成B（列）<code>xxx.rename(columns={&#39;A&#39;: &#39;B&#39;})</code></li>
+<li>行标<code>xxx.rename(index={0: xxxx, 1: xxxx})</code>直接<code>set_index</code>就好</li>
+<li>重新设单独的列或行索引<code>xxx.rename_axis(xxx,axis=&#39;rows&#39;).rename_axis(xxx, axis=&#39;columns&#39;)</code></li>
+</ul>
+</li>
+<li><p><a href="https://pandas.pydata.org/pandas-docs/stable/merging.html" target="_blank" rel="noopener">组合</a></p>
+<ul>
+<li><code>concat</code>：<code>pd.concat([xxx,xxx])</code>把列标相同的组合起来</li>
+<li><code>join</code>：<code>left.join(right,lsuffix=&#39;xx&#39;, rsuffix=&#39;xxx&#39;</code>)</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/07/Linux常见操作和命令/" rel="next" title="Linux常见操作和命令">
+                <i class="fa fa-chevron-left"></i> Linux常见操作和命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/10/pandas/" rel="prev" title="pandas.md">
+                pandas.md <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">li yifan</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lyfzero" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pandas"><span class="nav-number">1.</span> <span class="nav-text">pandas</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">li yifan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@2/dist/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/fastclick@1/lib/fastclick.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-lazyload@1/jquery.lazyload.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
